@@ -41,10 +41,6 @@ rm VBoxGuestAdditions_$VBOX_VERSION.iso
 apt-get -y remove linux-headers-$(uname -r) build-essential
 apt-get -y autoremove
 
-# Zero out the free space to save space in the final image:
-#dd if=/dev/zero of=/EMPTY bs=1M
-#rm -f /EMPTY
-
 # Setting editors
 update-alternatives --set editor /usr/bin/vim.basic
 
@@ -61,6 +57,9 @@ parted /dev/sda -- mkpart primary ext2 15GB -1s
 parted /dev/sda -- toggle 2 lvm
 pvcreate /dev/sda2
 vgcreate ganeti /dev/sda2
+lvcreate -L 512M -n swap ganeti
+mkswap -f /dev/ganeti/swap
+sed -i -e 's/sda5/ganeti\/swap/' /etc/fstab
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
@@ -73,6 +72,10 @@ rm /etc/udev/rules.d/70-persistent-net.rules
 mkdir /etc/udev/rules.d/70-persistent-net.rules
 rm -rf /dev/.udev/
 rm /lib/udev/rules.d/75-persistent-net-generator.rules
+
+# Zero out the free space to save space in the final image:
+dd if=/dev/zero of=/EMPTY bs=1M
+rm -f /EMPTY
 
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
 echo "pre-up sleep 2" >> /etc/network/interfaces
