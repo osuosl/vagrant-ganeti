@@ -61,6 +61,12 @@ lvcreate -L 512M -n swap ganeti
 mkswap -f /dev/ganeti/swap
 sed -i -e 's/sda5/ganeti\/swap/' /etc/fstab
 
+# Add ganeti image
+echo "adding ganeti guest image"
+mkdir -p /var/cache/ganeti-instance-image/
+wget -O /var/cache/ganeti-instance-image/debian-6.0.1-x86_64-boot.dump http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.1-x86_64-boot.dump
+wget -O /var/cache/ganeti-instance-image/debian-6.0.1-x86_64-root.dump http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.1-x86_64-root.dump
+
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
 rm /var/lib/dhcp3/*
