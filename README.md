@@ -84,6 +84,13 @@ use in GWM.
 
     33.33.33.10 ganeti.example.org
 
+# RAPI Access
+
+The RAPI user setup for use on the cluster uses the following credentials.
+
+* user: vagrant
+* pass: vagrant
+
 # Copyright
 
 This work is licensed under a [Creative Commons Attribution-Share Alike 3.0
