@@ -31,11 +31,11 @@ page](https://www.virtualbox.org/wiki/Downloads).
 
 2. Install Vagrant
 
-    gem install vagrant
+    `gem install vagrant`
 
 3. Initialize submodule(s)
 
-    git submodule init
+    `git submodule init`
 
 # Using Vagrant
 
@@ -66,6 +66,23 @@ NOTE: Root password is 'vagrant'.
     vagrant up node3
     vagrant ssh node1
     gnt-node add -s 33.33.34.13 node3
+
+# Accessing the nodes
+
+All the nodes are using `hostonly` networking with the following IP's:
+
+* ganeti.example.org (cluster IP) = 33.33.33.10
+* node1.example.org = 33.33.33.11
+* node2.example.org = 33.33.33.12
+* node3.example.org = 33.33.33.13
+* node1 (drbd) = 33.33.34.11
+* node2 (drbd) = 33.33.34.12
+* node3 (drbd) = 33.33.34.13
+
+It might be helpful to add the following to your `/etc/hosts` so its easier to
+use in GWM.
+
+    33.33.33.10 ganeti.example.org
 
 # Copyright
 
