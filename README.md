@@ -79,6 +79,14 @@ All the nodes are using `hostonly` networking with the following IP's:
 * node2 (drbd) = 33.33.34.12
 * node3 (drbd) = 33.33.34.13
 
+Additionally, I have setup several VM DNS names in the `/etc/hosts` of each
+node that you can use:
+
+* instance1.example.org
+* instance2.example.org
+* instance3.example.org
+* instance4.example.org
+
 It might be helpful to add the following to your `/etc/hosts` so its easier to
 use in GWM.
 
