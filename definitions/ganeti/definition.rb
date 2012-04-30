@@ -7,7 +7,7 @@ Veewee::Session.declare({
   :os_type_id => 'Ubuntu_64',
   :iso_file => "ubuntu-11.10-server-amd64.iso",
   :iso_src => "http://ubuntu.osuosl.org/releases/11.10/ubuntu-11.10-server-amd64.iso",
-  :iso_md5 => "f8a0112b7cb5dcd6d564dbe59f18c35f",
+  :iso_md5 => `curl -s http://ubuntu.osuosl.org/releases/11.10/MD5SUMS -o - | awk '{if ( $2 == \"*ubuntu-11.10-server-amd64.iso\") print $1 }'`.strip,
   :iso_download_timeout => "1000",
   :boot_wait => "10",
   :boot_cmd_sequence => [
