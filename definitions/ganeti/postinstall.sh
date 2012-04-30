@@ -44,11 +44,6 @@ apt-get -y autoremove
 # Setting editors
 update-alternatives --set editor /usr/bin/vim.basic
 
-# Copy puppet module
-mkdir -p /etc/puppet/modules
-git clone git://github.com/ramereth/puppet-ganeti-tutorial.git /etc/puppet/modules/ganeti_tutorial
-ln -s /etc/puppet/modules/ganeti_tutorial /root/puppet
-
 # Configure LVM
 echo "configuring LVM"
 swapoff -a
@@ -64,8 +59,8 @@ sed -i -e 's/sda5/ganeti\/swap/' /etc/fstab
 # Add ganeti image
 echo "adding ganeti guest image"
 mkdir -p /var/cache/ganeti-instance-image/
-wget -O /var/cache/ganeti-instance-image/debian-6.0.1-x86_64-boot.dump http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.1-x86_64-boot.dump
-wget -O /var/cache/ganeti-instance-image/debian-6.0.1-x86_64-root.dump http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.1-x86_64-root.dump
+wget -O /var/cache/ganeti-instance-image/debian-6.0.4-x86_64.tar.gz http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.4-x86_64.tar.gz
+wget -O /var/cache/ganeti-instance-image/cirros-0.3.0-x86_64.tar.gz http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-lxc.tar.gz
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
