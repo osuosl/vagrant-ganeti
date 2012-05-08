@@ -99,6 +99,17 @@ The RAPI user setup for use on the cluster uses the following credentials.
 * user: vagrant
 * pass: vagrant
 
+# Ganeti Version Branches
+
+This repo has been setup to deal with a variety of Ganeti versions for testing.
+Currently it only supports 2.4.5 and 2.5.0. To switch between the versions do
+the following:
+
+    git checkout -b ganeti-2.5 origin/ganeti-2.5
+    git submodule update --init
+
+This should switch the module to using the new branch.
+
 # Copyright
 
 This work is licensed under a [Creative Commons Attribution-Share Alike 3.0
