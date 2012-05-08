@@ -10,7 +10,7 @@ Vagrant::Config.run do |config|
         config.vm.provision :puppet do |puppet|
             puppet.manifests_path   = "modules/ganeti_tutorial/nodes"
             puppet.module_path      = "modules"
-            puppet.manifest_file    = "node1-complete.pp"
+            puppet.manifest_file    = "node1.pp"
         end
     end
 
