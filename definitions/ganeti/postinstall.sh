@@ -12,9 +12,15 @@ apt-get -y install linux-headers-$(uname -r) build-essential vim puppet \
 apt-get clean
 
 # Setup sudo to allow no-password sudo for "admin"
+groupadd -r admin
+usermod -a -G admin vagrant
 cp /etc/sudoers /etc/sudoers.orig
 sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=admin' /etc/sudoers
 sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+
+# Ensure passwords are correct
+echo "root:vagrant" | chpasswd
+echo "vagrant:vagrant" | chpasswd
 
 # Install NFS client
 apt-get -y install nfs-common
@@ -59,7 +65,7 @@ sed -i -e 's/sda5/ganeti\/swap/' /etc/fstab
 # Add ganeti image
 echo "adding ganeti guest image"
 mkdir -p /var/cache/ganeti-instance-image/
-wget -O /var/cache/ganeti-instance-image/debian-6.0.4-x86_64.tar.gz http://staff.osuosl.org/~ramereth/ganeti-tutorial/debian-6.0.4-x86_64.tar.gz
+wget -O /var/cache/ganeti-instance-image/ubuntu-12.04-x86_64.tar.gz http://packages.osuosl.org/ganeti-images/ubuntu-12.04-x86_64.tar.gz
 wget -O /var/cache/ganeti-instance-image/cirros-0.3.0-x86_64.tar.gz http://launchpad.net/cirros/trunk/0.3.0/+download/cirros-0.3.0-x86_64-lxc.tar.gz
 
 # Removing leftover leases and persistent rules
