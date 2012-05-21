@@ -35,7 +35,7 @@ page](https://www.virtualbox.org/wiki/Downloads).
 
 3. Initialize submodule(s)
 
-    `git submodule init`
+    `git submodule update --init`
 
 # Using Vagrant
 
