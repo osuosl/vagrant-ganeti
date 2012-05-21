@@ -21,7 +21,7 @@ of this is for instructional and testing purposes only.
 
 # Requirements
 
-* VirtualBox >=4.1.12
+* VirtualBox >=4.1.x
 * vagrant >=1.0.x
 
 # Setup
@@ -69,15 +69,19 @@ NOTE: Root password is 'vagrant'.
 
 # Accessing the nodes
 
+Add the following to your `/etc/hosts` files for easier access locally.
+
+    33.33.33.10 ganeti.example.org
+    33.33.33.11 node1.example.org
+    33.33.33.12 node2.example.org
+    33.33.33.13 node3.example.org
+
 All the nodes are using `hostonly` networking with the following IP's:
 
 * ganeti.example.org (cluster IP) = 33.33.33.10
 * node1.example.org = 33.33.33.11
 * node2.example.org = 33.33.33.12
 * node3.example.org = 33.33.33.13
-* node1 (drbd) = 33.33.34.11
-* node2 (drbd) = 33.33.34.12
-* node3 (drbd) = 33.33.34.13
 
 Additionally, I have setup several VM DNS names in the `/etc/hosts` of each
 node that you can use:
@@ -86,11 +90,6 @@ node that you can use:
 * instance2.example.org
 * instance3.example.org
 * instance4.example.org
-
-It might be helpful to add the following to your `/etc/hosts` so its easier to
-use in GWM.
-
-    33.33.33.10 ganeti.example.org
 
 # RAPI Access
 
