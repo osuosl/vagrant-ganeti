@@ -2,6 +2,8 @@ Vagrant::Config.run do |config|
 
     config.vm.define :node1 do |config|
         #config.vm.boot_mode = "gui"
+        # uncomment to disable hardware virt
+        #config.vm.customize ["modifyvm", :id, "--hwvirtex", "off"]
         config.vm.host_name = "node1.example.org"
         config.vm.box       = "ganeti-32bit"
         config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-32bit.box"
@@ -17,6 +19,8 @@ Vagrant::Config.run do |config|
 
     config.vm.define :node2 do |config|
         #config.vm.boot_mode = "gui"
+        # uncomment to disable hardware virt
+        #config.vm.customize ["modifyvm", :id, "--hwvirtex", "off"]
         config.vm.host_name = "node2.example.org"
         config.vm.box       = "ganeti-32bit"
         config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-32bit.box"
@@ -31,6 +35,8 @@ Vagrant::Config.run do |config|
 
     config.vm.define :node3 do |config|
         #config.vm.boot_mode = "gui"
+        # uncomment to disable hardware virt
+        #config.vm.customize ["modifyvm", :id, "--hwvirtex", "off"]
         config.vm.host_name = "node3.example.org"
         config.vm.box       = "ganeti-32bit"
         config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-32bit.box"
