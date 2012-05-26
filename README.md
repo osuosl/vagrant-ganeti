@@ -22,7 +22,7 @@ of this is for instructional and testing purposes only.
 # Requirements
 
 * VirtualBox >=4.1.x
-* vagrant >=1.0.x
+* vagrant >=1.0.3
 
 # Setup
 
@@ -98,16 +98,16 @@ The RAPI user setup for use on the cluster uses the following credentials.
 * user: vagrant
 * pass: vagrant
 
-# Ganeti Version Branches
+# Running different Ganeti versions
 
 This repo has been setup to deal with a variety of Ganeti versions for testing.
-Currently it only supports 2.4.5 and 2.5.0. To switch between the versions do
-the following:
+Currently it only supports 2.4.5, 2.5.1, and any git tagged releases. To switch
+between the versions do the following:
 
-    git checkout -b ganeti-2.5 origin/ganeti-2.5
-    git submodule update --init
-
-This should switch the module to using the new branch.
+- edit `modules/ganeti_tutorial/node{1-3}.pp`
+- if using git, change `git` to `true`
+- change `ganeti_version` to desired version
+- redeploy the vm(s) (destroy, up)
 
 # Copyright
 
