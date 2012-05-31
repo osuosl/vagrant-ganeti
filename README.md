@@ -118,7 +118,8 @@ appropriate folder.
 * Debian 6 (debian-6)
 * Debian 7 (debian-7)
 * CentOS 6 (centos-6)
-* Ubuntu 12.10 (still a work in progress)
+* CentOS 5 (work in progress)
+* Ubuntu 12.10 (work in progress)
 
 # Deploying Ganeti Web Manager (GWM)
 
