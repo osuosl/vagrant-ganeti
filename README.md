@@ -109,6 +109,26 @@ between the versions do the following:
 - change `ganeti_version` to desired version
 - redeploy the vm(s) (destroy, up)
 
+# Node Operating System
+
+By default we use Ubuntu 11.10 for our node OS but we do have support for the
+following operating systems. Just run the vagrant commands from inside the
+appropriate folder.
+
+* Debian 6 (debian-6)
+* Debian 7 (debian-7)
+* CentOS 6 (centos-6)
+* Ubuntu 12.10 (still a work in progress)
+
+# Deploying Ganeti Web Manager (GWM)
+
+This repo also supports automatically deploying GWM inside of the `node1`
+instance. You can achieve this by changing the puppet manifest for node1 to
+point to `node1-gwm.pp` instead.
+
+**NOTE: This is still not quite working right. I hope to have this fixed with
+the 0.9 release of GWM**
+
 # Copyright
 
 This work is licensed under a [Creative Commons Attribution-Share Alike 3.0
