@@ -3,6 +3,11 @@ set -x
 
 date > /etc/vagrant_box_build_time
 
+# Use newer puppet
+wget http://apt.puppetlabs.com/puppetlabs-release_1.0-3_all.deb
+dpkg -i puppetlabs-release_1.0-3_all.deb
+rm puppetlabs-release_1.0-3_all.deb
+
 # Apt-install various things necessary for Ruby, guest additions,
 # etc., and remove optional things to trim down the machine.
 apt-get -y update
@@ -59,7 +64,7 @@ sed -i -e 's/sda5/ganeti\/swap/' /etc/fstab
 # Add ganeti image
 echo "adding ganeti guest image"
 mkdir -p /var/cache/ganeti-instance-image/
-wget -O /var/cache/ganeti-instance-image/cirros-0.3.0-i386.tar.gz http://staff.osuosl.org/~ramereth/ganeti-tutorial/cirros-0.3.0-i386.tar.gz
+wget -O /var/cache/ganeti-instance-image/cirros-0.3.0-x86_64.tar.gz http://staff.osuosl.org/~ramereth/ganeti-tutorial/cirros-0.3.0-x86_64.tar.gz
 
 # Removing leftover leases and persistent rules
 echo "cleaning up dhcp leases"
