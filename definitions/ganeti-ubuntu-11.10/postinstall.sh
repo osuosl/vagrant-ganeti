@@ -35,12 +35,10 @@ chown -R vagrant /home/vagrant/.ssh
 # Installing the virtualbox guest additions
 VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
 cd /tmp
-wget http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso
-mount -o loop VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
+mount -o loop /home/veewee/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
-
-rm VBoxGuestAdditions_$VBOX_VERSION.iso
+rm /home/veewee/VBoxGuestAdditions_$VBOX_VERSION.iso
 
 # Remove items used for building, since they aren't needed anymore
 apt-get -y remove linux-headers-$(uname -r) build-essential
