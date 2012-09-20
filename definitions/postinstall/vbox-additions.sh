@@ -7,6 +7,14 @@ if [ -f /etc/redhat-release ] ; then
     $yum erase gtk2 libX11 hicolor-icon-theme avahi freetype bitstream-vera-fonts
 elif [ -f /etc/debian_version ] ; then
     $apt install linux-headers-$(uname -r) build-essential
+    if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then
+        # The netboot installs the VirtualBox support (old) so we have to
+        # remove it
+        /etc/init.d/virtualbox-ose-guest-utils stop
+        rmmod vboxguest
+        $apt purge virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms \
+            virtualbox-ose-guest-utils
+    fi
 fi
 
 # Installing the virtualbox guest additions

@@ -1,7 +1,7 @@
 # Setup ganeti
 
 if [ -f /etc/debian_version ] ; then
-    $apt install vim git-core lvm2 aptitude nfs-common
+    $apt install vim git-core lvm2 aptitude nfs-common parted
 
     # Setting editors
     update-alternatives --set editor /usr/bin/vim.basic
