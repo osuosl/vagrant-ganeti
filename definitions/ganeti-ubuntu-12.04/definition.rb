@@ -5,9 +5,9 @@ Veewee::Session.declare({
   :disk_format => 'VDI',
   :hostiocache => 'off',
   :os_type_id => 'Ubuntu_64',
-  :iso_file => "ubuntu-12.04-server-amd64.iso",
-  :iso_src => "http://ubuntu.osuosl.org/releases/12.04/ubuntu-12.04-server-amd64.iso",
-  :iso_md5 => `curl -s http://ubuntu.osuosl.org/releases/12.04/MD5SUMS -o - | awk '{if ( $2 == \"*ubuntu-12.04-server-amd64.iso\") print $1 }'`.strip,
+  :iso_file => "ubuntu-12.04.1-server-amd64.iso",
+  :iso_src => "http://ubuntu.osuosl.org/releases/12.04.1/ubuntu-12.04.1-server-amd64.iso",
+  :iso_md5 => `curl -s http://ubuntu.osuosl.org/releases/12.04.1/MD5SUMS -o - | awk '{if ( $2 == \"*ubuntu-12.04.1-server-amd64.iso\") print $1 }'`.strip,
   :iso_download_timeout => "1000",
   :boot_wait => "4",
   :boot_cmd_sequence => [

@@ -1,0 +1,1 @@
+../postinstall/ganeti.sh
