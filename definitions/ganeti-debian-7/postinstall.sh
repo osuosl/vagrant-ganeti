@@ -58,6 +58,9 @@ elif [ -f /etc/debian_version ] ; then
         rmmod vboxguest
         $apt purge virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms \
             virtualbox-ose-guest-utils
+    elif [ -f /etc/init.d/virtualbox-guest-utils ] ; then
+        /etc/init.d/virtualbox-guest-utils stop
+        $apt purge virtualbox-guest-utils virtualbox-guest-dkms virtualbox-guest-x11
     fi
 fi
 

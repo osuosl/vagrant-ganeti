@@ -50,7 +50,18 @@ if [ -f /etc/redhat-release ] ; then
     $yum install gcc-c++ zlib-devel openssl-devel readline-devel sqlite3-devel
     $yum erase gtk2 libX11 hicolor-icon-theme avahi freetype bitstream-vera-fonts
 elif [ -f /etc/debian_version ] ; then
-    $apt install linux-headers-$(uname -r) build-essential
+    $apt install linux-headers-$(uname -r) build-essential dkms
+    if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then
+        # The netboot installs the VirtualBox support (old) so we have to
+        # remove it
+        /etc/init.d/virtualbox-ose-guest-utils stop
+        rmmod vboxguest
+        $apt purge virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms \
+            virtualbox-ose-guest-utils
+    elif [ -f /etc/init.d/virtualbox-guest-utils ] ; then
+        /etc/init.d/virtualbox-guest-utils stop
+        $apt purge virtualbox-guest-utils virtualbox-guest-dkms virtualbox-guest-x11
+    fi
 fi
 
 # Installing the virtualbox guest additions
@@ -79,7 +90,7 @@ fi
 # Setup ganeti
 
 if [ -f /etc/debian_version ] ; then
-    $apt install vim git-core lvm2 aptitude nfs-common
+    $apt install vim git-core lvm2 aptitude nfs-common parted
 
     # Setting editors
     update-alternatives --set editor /usr/bin/vim.basic

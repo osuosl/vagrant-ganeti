@@ -19,6 +19,8 @@ Veewee::Session.declare({
     'debconf/frontend=noninteractive ',
     'console-setup/ask_detect=false ',
     'console-keymaps-at/keymap=us ',
+    '<Enter>',
+    '<Wait>'*4,
     '<Enter>'
   ],
   :kickstart_port => "7122",
