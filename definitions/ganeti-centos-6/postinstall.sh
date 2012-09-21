@@ -50,6 +50,8 @@ echo "vagrant:vagrant" | chpasswd
 
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 sed -i "s/^\(.*env_keep = \"\)/\1PATH /" /etc/sudoers
+sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+sed -i -e 's/%sudo.*ALL=.*ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 # VirtualBox Additions
 
@@ -59,7 +61,7 @@ if [ -f /etc/redhat-release ] ; then
     $yum install gcc-c++ zlib-devel openssl-devel readline-devel sqlite3-devel
     $yum erase gtk2 libX11 hicolor-icon-theme avahi freetype bitstream-vera-fonts
 elif [ -f /etc/debian_version ] ; then
-    $apt install linux-headers-$(uname -r) build-essential
+    $apt install linux-headers-$(uname -r) build-essential dkms
     if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then
         # The netboot installs the VirtualBox support (old) so we have to
         # remove it
@@ -67,6 +69,9 @@ elif [ -f /etc/debian_version ] ; then
         rmmod vboxguest
         $apt purge virtualbox-ose-guest-x11 virtualbox-ose-guest-dkms \
             virtualbox-ose-guest-utils
+    elif [ -f /etc/init.d/virtualbox-guest-utils ] ; then
+        /etc/init.d/virtualbox-guest-utils stop
+        $apt purge virtualbox-guest-utils virtualbox-guest-dkms virtualbox-guest-x11
     fi
 fi
 
@@ -115,6 +120,9 @@ if [ -f /etc/debian_version ] ; then
 elif [ -f /etc/redhat-release ] ; then
     $yum install git vim nfs-utils
 fi
+
+# Remove 127.0.1.1 host entry as it confuses ganeti during initialization
+sed -i -e 's/127.0.1.1.*//' /etc/hosts
 
 # Install ganeti deps
 git clone -q git://github.com/ramereth/vagrant-ganeti.git

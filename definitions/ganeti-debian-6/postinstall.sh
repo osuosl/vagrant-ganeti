@@ -41,6 +41,8 @@ echo "vagrant:vagrant" | chpasswd
 
 sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
 sed -i "s/^\(.*env_keep = \"\)/\1PATH /" /etc/sudoers
+sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+sed -i -e 's/%sudo.*ALL=.*ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 # VirtualBox Additions
 
@@ -109,6 +111,9 @@ if [ -f /etc/debian_version ] ; then
 elif [ -f /etc/redhat-release ] ; then
     $yum install git vim nfs-utils
 fi
+
+# Remove 127.0.1.1 host entry as it confuses ganeti during initialization
+sed -i -e 's/127.0.1.1.*//' /etc/hosts
 
 # Install ganeti deps
 git clone -q git://github.com/ramereth/vagrant-ganeti.git
