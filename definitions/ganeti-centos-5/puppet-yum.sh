@@ -1,0 +1,1 @@
+../postinstall/puppet-yum.sh
