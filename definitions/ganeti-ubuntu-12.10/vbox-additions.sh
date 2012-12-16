@@ -1,0 +1,1 @@
+../postinstall/vbox-additions.sh
