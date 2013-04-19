@@ -4,9 +4,9 @@ Veewee::Session.declare({
   :disk_size => '40960',
   :disk_format => 'VDI', :hostiocache => 'off',
   :os_type_id => 'RedHat_64',
-  :iso_file => "CentOS-6.3-x86_64-minimal.iso",
-  :iso_src => "http://centos.osuosl.org/6.3/isos/x86_64/CentOS-6.3-x86_64-minimal.iso",
-  :iso_md5 => `curl -s http://centos.osuosl.org/6.3/isos/x86_64/md5sum.txt -o - | awk '{if ( $2 == \"CentOS-6.3-x86_64-minimal.iso\") print $1 }'`.strip,
+  :iso_file => "CentOS-6.4-x86_64-minimal.iso",
+  :iso_src => "http://centos.osuosl.org/6.4/isos/x86_64/CentOS-6.4-x86_64-minimal.iso",
+  :iso_md5 => `curl -s http://centos.osuosl.org/6.4/isos/x86_64/md5sum.txt -o - | awk '{if ( $2 == \"CentOS-6.4-x86_64-minimal.iso\") print $1 }'`.strip,
   :iso_download_timeout => 1000,
   :boot_wait => "10", :boot_cmd_sequence => [
     '<Tab> text ks=http://%IP%:%PORT%/ks.cfg<Enter>'

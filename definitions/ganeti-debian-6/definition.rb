@@ -5,9 +5,9 @@ Veewee::Session.declare({
   :disk_format => 'VDI',
   :hostiocache => 'off',
   :os_type_id => 'Debian_64',
-  :iso_file => "debian-6.0.6-amd64-netinst.iso",
-  :iso_src => "http://debian.osuosl.org/debian-cdimage/6.0.6/amd64/iso-cd/debian-6.0.6-amd64-netinst.iso",
-  :iso_md5 => `curl -s http://debian.osuosl.org/debian-cdimage/6.0.6/amd64/iso-cd/MD5SUMS -o - | awk '{if ( $2 == "debian-6.0.6-amd64-netinst.iso") print $1 }'`.strip,
+  :iso_file => "debian-6.0.7-amd64-netinst.iso",
+  :iso_src => "http://debian.osuosl.org/debian-cdimage/6.0.7/amd64/iso-cd/debian-6.0.7-amd64-netinst.iso",
+  :iso_md5 => `curl -s http://debian.osuosl.org/debian-cdimage/6.0.7/amd64/iso-cd/MD5SUMS -o - | awk '{if ( $2 == "debian-6.0.7-amd64-netinst.iso") print $1 }'`.strip,
   :iso_download_timeout => "1000",
   :boot_wait => "10", :boot_cmd_sequence => [
     '<Esc>',

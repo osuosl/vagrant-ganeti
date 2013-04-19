@@ -5,9 +5,9 @@ Veewee::Session.declare({
   :disk_format => 'VDI',
   :hostiocache => 'off',
   :os_type_id => 'Debian_64',
-  :iso_file => "debian-wheezy-DI-b4-amd64-netinst.iso",
-  :iso_src => "http://cdimage.debian.org/cdimage/wheezy_di_beta4/amd64/iso-cd/debian-wheezy-DI-b4-amd64-netinst.iso",
-  :iso_md5 => `curl -s http://cdimage.debian.org/cdimage/wheezy_di_beta4/amd64/iso-cd/MD5SUMS -o - | awk '{if ( $2 == "debian-wheezy-DI-b4-amd64-netinst.iso") print $1 }'`.strip,
+  :iso_file => "debian-wheezy-DI-rc1-amd64-netinst.iso",
+  :iso_src => "http://cdimage.debian.org/cdimage/wheezy_di_rc1/amd64/iso-cd/debian-wheezy-DI-rc1-amd64-netinst.iso",
+  :iso_md5 => `curl -s http://cdimage.debian.org/cdimage/wheezy_di_rc1/amd64/iso-cd/MD5SUMS -o - | awk '{if ( $2 == "debian-wheezy-DI-rc1-amd64-netinst.iso") print $1 }'`.strip,
   :iso_download_timeout => "1000",
   :boot_wait => "10", :boot_cmd_sequence => [
     '<Esc>',

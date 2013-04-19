@@ -5,5 +5,5 @@ dpkg -i $puppet_release
 rm $puppet_release
 
 $apt update
-$apt install puppet facter
+$apt install puppet facter curl rubygems
 

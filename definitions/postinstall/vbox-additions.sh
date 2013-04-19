@@ -4,7 +4,8 @@
 if [ -f /etc/redhat-release ] ; then
     $yum install gcc bzip2 make kernel-devel-$(uname -r)
     $yum install gcc-c++ zlib-devel openssl-devel readline-devel sqlite3-devel
-    $yum erase gtk2 libX11 hicolor-icon-theme avahi freetype bitstream-vera-fonts
+    $yum erase gtk2 libXext libXfixes libXrender hicolor-icon-theme avahi \
+        freetype bitstream-vera-fonts
 elif [ -f /etc/debian_version ] ; then
     $apt install linux-headers-$(uname -r) build-essential dkms
     if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then

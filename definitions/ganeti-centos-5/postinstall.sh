@@ -13,53 +13,85 @@ fail()
     exit 1
 }
 
+chroot_cmd() {
+    chroot /mnt/gentoo $@
+}
+
 if [ -x /usr/bin/lsb_release ] ; then
-    OSRELEASE="$(lsb_release -s -c)"
+    OS="$(lsb_release -s -i | tr '[A-Z]' '[a-z]')"
+    if [ "$OS" == "centos" ] ; then
+        OSRELEASE="$(lsb_release -s -r | sed -e 's/\..*//')"
+    else
+        OSRELEASE="$(lsb_release -s -c)"
+    fi
 elif [ -f /etc/redhat-release ] ; then
     OSRELEASE="$(awk '{print $3}' /etc/redhat-release | sed -e 's/\..*//')"
+    OS="$(awk '{print tolower($1)}' /etc/redhat-release)"
+elif [ -f /etc/gentoo-release ] ; then
+    OS="gentoo"
 fi
 
 # install puppet
-cat > /etc/yum.repos.d/puppetlabs.repo << EOM
-[puppetlabs]
-name=puppetlabs
-baseurl=http://yum.puppetlabs.com/el/${OSRELEASE}/products/\$basearch
-enabled=1
-gpgcheck=0
-EOM
-
-cat > /etc/yum.repos.d/epel.repo << EOM
+if [ "$OS" == "centos" ] ; then
+    URL="http://yum.puppetlabs.com/el/${OSRELEASE}"
+    cat > /etc/yum.repos.d/epel.repo << EOM
 [epel]
 name=epel
 baseurl=http://epel.osuosl.org/${OSRELEASE}/\$basearch
 enabled=1
 gpgcheck=0
 EOM
+else
+    URL="http://yum.puppetlabs.com/fedora/f${OSRELEASE}"
+fi
 
-$yum install puppet facter
+cat > /etc/yum.repos.d/puppetlabs.repo << EOM
+[puppetlabs]
+name=puppetlabs
+baseurl=${URL}/products/\$basearch
+enabled=1
+gpgcheck=0
+
+[puppetlabs-deps]
+name=puppetlabs-deps
+baseurl=${URL}/dependencies/\$basearch
+enabled=1
+gpgcheck=0
+EOM
+
+$yum install puppet facter bash-completion
+echo "set background=dark" >> /etc/vimrc
+
+# Add vagrant user
+if [ ! -d ${rootfs}/home/vagrant ] ; then
+    $run_cmd groupadd vagrant
+    $run_cmd useradd -d /home/vagrant -s /bin/bash -m -g vagrant vagrant
+fi
+
 # Installing vagrant keys
-mkdir /home/vagrant/.ssh
-chmod 700 /home/vagrant/.ssh
-cd /home/vagrant/.ssh
-wget -q --no-check-certificate 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' -O authorized_keys
-chown -R vagrant /home/vagrant/.ssh
+mkdir ${rootfs}/home/vagrant/.ssh
+chmod 700 ${rootfs}/home/vagrant/.ssh
+wget -q --no-check-certificate 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' -O ${rootfs}/home/vagrant/.ssh/authorized_keys
+$run_cmd chown -R vagrant /home/vagrant/.ssh
 
 # Ensure passwords are correct
-echo "root:vagrant" | chpasswd
-echo "vagrant:vagrant" | chpasswd
+$run_cmd echo "root:vagrant" | chpasswd
+$run_cmd echo "vagrant:vagrant" | chpasswd
 
-sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
-sed -i "s/^\(.*env_keep = \"\)/\1PATH /" /etc/sudoers
-sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
-sed -i -e 's/%sudo.*ALL=.*ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
-
+if [ -f /etc/sudoers ] ; then
+    sed -i "s/^.*requiretty/#Defaults requiretty/" /etc/sudoers
+    sed -i "s/^\(.*env_keep = \"\)/\1PATH /" /etc/sudoers
+    sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
+    sed -i -e 's/%sudo.*ALL=.*ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
+fi
 # VirtualBox Additions
 
 # kernel source is needed for vbox additions
 if [ -f /etc/redhat-release ] ; then
     $yum install gcc bzip2 make kernel-devel-$(uname -r)
     $yum install gcc-c++ zlib-devel openssl-devel readline-devel sqlite3-devel
-    $yum erase gtk2 libX11 hicolor-icon-theme avahi freetype bitstream-vera-fonts
+    $yum erase gtk2 libXext libXfixes libXrender hicolor-icon-theme avahi \
+        freetype bitstream-vera-fonts
 elif [ -f /etc/debian_version ] ; then
     $apt install linux-headers-$(uname -r) build-essential dkms
     if [ -f /etc/init.d/virtualbox-ose-guest-utils ] ; then
@@ -149,10 +181,27 @@ if [ -f /etc/debian_version ] ; then
     rm -rf /dev/.udev/
     rm /lib/udev/rules.d/75-persistent-net-generator.rules
 
+    # remove annoying resolvconf package
+    DEBIAN_FRONTEND=noninteractive apt-get -y remove resolvconf
+
     echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
     echo "pre-up sleep 2" >> /etc/network/interfaces
+    # Remove all kernels except the current version
+    dpkg-query -l 'linux-image-[0-9]*' | grep ^ii | awk '{print $2}' | \
+        grep -v $(uname -r) | xargs -r apt-get -y remove
     apt-get -y clean all
 elif [ -f /etc/redhat-release ] ; then
+    # Exclude upgrading kernels
+    if [ "$OS" == "centos" ] ; then
+        sed -i -e 's/\[updates\]/\[updates\]\nexclude=kernel*/' \
+            /etc/yum.repos.d/CentOS-Base.repo
+    else
+        sed -i -e 's/\[updates\]/\[updates\]\nexclude=kernel*/' \
+            /etc/yum.repos.d/fedora-updates.repo
+    fi
+    # Remove all kernels except the current version
+    rpm -qa | grep ^kernel-[0-9].* | sort | grep -v $(uname -r) | \
+        xargs -r yum -y remove
     yum -y clean all
 fi
 
