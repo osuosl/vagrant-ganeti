@@ -35,7 +35,7 @@ page](https://www.virtualbox.org/wiki/Downloads).
 
 3. Initialize submodule(s)
 
-    ./update
+    `./update`
 
 # Using Vagrant
 
@@ -102,7 +102,7 @@ The RAPI user setup for use on the cluster uses the following credentials.
 
 This repo has been setup to deal with a variety of Ganeti versions for testing.
 Currently it only supports 2.4.x, 2.5.x, 2.6.x and any git tagged releases.
-Currently 2.7.x is not supported but will be soon. To switch between the
+*Currently 2.7.x is not supported but will be soon.* To switch between the
 versions do the following:
 
 - edit `modules/ganeti_tutorial/node{1-3}.pp`
