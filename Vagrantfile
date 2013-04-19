@@ -1,1 +1,1 @@
-ubuntu-11.10/Vagrantfile
+ubuntu-12.04/Vagrantfile
