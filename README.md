@@ -35,7 +35,7 @@ page](https://www.virtualbox.org/wiki/Downloads).
 
 3. Initialize submodule(s)
 
-    `git submodule update --init`
+    ./update
 
 # Using Vagrant
 
@@ -101,8 +101,9 @@ The RAPI user setup for use on the cluster uses the following credentials.
 # Running different Ganeti versions
 
 This repo has been setup to deal with a variety of Ganeti versions for testing.
-Currently it only supports 2.4.5, 2.5.1, and any git tagged releases. To switch
-between the versions do the following:
+Currently it only supports 2.4.x, 2.5.x, 2.6.x and any git tagged releases.
+Currently 2.7.x is not supported but will be soon. To switch between the
+versions do the following:
 
 - edit `modules/ganeti_tutorial/node{1-3}.pp`
 - if using git, change `git` to `true`
@@ -111,17 +112,22 @@ between the versions do the following:
 
 # Node Operating System
 
-By default we use Ubuntu 11.10 for our node OS but we do have support for the
+By default we use Ubuntu 12.04 for our node OS but we do have support for the
 following operating systems. Just run the vagrant commands from inside the
 appropriate folder.
 
+* Ubuntu 11.10 (ubuntu-11.10)
+* Ubuntu 12.04 (ubuntu-12.04)
+* Ubuntu 12.10 (ubuntu-12.10)
+* Ubuntu 13.04 (ubuntu-13.04) (work in progress)
 * Debian 6 (debian-6)
-* Debian 7 (debian-7)
+* Debian 7 (debian-7) (pre-release)
 * CentOS 6 (centos-6)
 * CentOS 5 (work in progress)
-* Ubuntu 12.10 (work in progress)
 
 # Deploying Ganeti Web Manager (GWM)
+
+**NOTE: This is currently broken. Please avoid trying this for now**
 
 This repo also supports automatically deploying GWM inside of the `node1`
 instance. You can achieve this by changing the puppet manifest for node1 to
