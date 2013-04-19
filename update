@@ -1,0 +1,4 @@
+#!/bin/bash
+set -x
+git pull
+git submodule update --init
