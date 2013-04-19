@@ -3,8 +3,8 @@ Vagrant::Config.run do |config|
     config.vm.define :node1 do |config|
         #config.vm.boot_mode = "gui"
         config.vm.host_name = "node1.example.org"
-        config.vm.box       = "ganeti-centos-6-20121216"
-        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20121216.box"
+        config.vm.box       = "ganeti-centos-6-20130411"
+        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20130411.box"
         config.vm.customize ["modifyvm", :id, "--memory", 768]
         config.vm.share_folder "v-root", "/vagrant", "../", :owner => "vagrant", :group => "vagrant"
         config.vm.network(:hostonly, "33.33.33.11", :adapter => 2, :auto_config => false)
@@ -19,8 +19,8 @@ Vagrant::Config.run do |config|
     config.vm.define :node2 do |config|
         #config.vm.boot_mode = "gui"
         config.vm.host_name = "node2.example.org"
-        config.vm.box       = "ganeti-centos-6-20121216"
-        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20121216.box"
+        config.vm.box       = "ganeti-centos-6-20130411"
+        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20130411.box"
         config.vm.customize ["modifyvm", :id, "--memory", 768]
         config.vm.share_folder "v-root", "/vagrant", "../", :owner => "vagrant", :group => "vagrant"
         config.vm.network(:hostonly, "33.33.33.12", :adapter => 2, :auto_config => false)
@@ -35,8 +35,8 @@ Vagrant::Config.run do |config|
     config.vm.define :node3 do |config|
         #config.vm.boot_mode = "gui"
         config.vm.host_name = "node3.example.org"
-        config.vm.box       = "ganeti-centos-6-20121216"
-        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20121216.box"
+        config.vm.box       = "ganeti-centos-6-20130411"
+        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-centos-6-20130411.box"
         config.vm.customize ["modifyvm", :id, "--memory", 768]
         config.vm.share_folder "v-root", "/vagrant", "../", :owner => "vagrant", :group => "vagrant"
         config.vm.network(:hostonly, "33.33.33.13", :adapter => 2, :auto_config => false)

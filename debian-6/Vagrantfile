@@ -3,8 +3,8 @@ Vagrant::Config.run do |config|
     config.vm.define :node1 do |config|
         #config.vm.boot_mode = "gui"
         config.vm.host_name = "node1.example.org"
-        config.vm.box       = "ganeti-debian-6-20121216"
-        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-debian-6-20121216.box"
+        config.vm.box       = "ganeti-debian-6-20130411"
+        config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-debian-6-20130411.box"
         config.vm.customize ["modifyvm", :id, "--memory", 512]
         config.vm.share_folder "v-root", "/vagrant", "../", :owner => "vagrant", :group => "vagrant"
         config.vm.network(:hostonly, "33.33.33.11", :adapter => 2, :auto_config => false)
