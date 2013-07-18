@@ -116,14 +116,12 @@ By default we use Ubuntu 12.04 for our node OS but we do have support for the
 following operating systems. Just run the vagrant commands from inside the
 appropriate folder.
 
-* Ubuntu 11.10 (ubuntu-11.10)
 * Ubuntu 12.04 (ubuntu-12.04)
 * Ubuntu 12.10 (ubuntu-12.10)
 * Ubuntu 13.04 (ubuntu-13.04) (work in progress)
 * Debian 6 (debian-6)
 * Debian 7 (debian-7) (pre-release)
 * CentOS 6 (centos-6)
-* CentOS 5 (work in progress)
 
 # Deploying Ganeti Web Manager (GWM)
 
