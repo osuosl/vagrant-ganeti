@@ -22,7 +22,7 @@ of this is for instructional and testing purposes only.
 # Requirements
 
 * VirtualBox >=4.1.x
-* vagrant >=1.0.3
+* vagrant >=1.2
 
 # Setup
 
