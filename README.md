@@ -29,9 +29,7 @@ of this is for instructional and testing purposes only.
 1. Install VirtualBox by going to their [download
 page](https://www.virtualbox.org/wiki/Downloads).
 
-2. Install Vagrant
-
-    `gem install vagrant`
+2. [Install Vagrant](http://docs.vagrantup.com/v2/installation/index.html)
 
 3. Initialize submodule(s)
 
@@ -44,28 +42,24 @@ depending on your use case. `Node1` will have Ganeti already initialized while
 the other two will only have Ganeti installed and primed.
 
 For more information on how to use Vagrant, please [check out their
-site](http://vagrantup.com/docs/index.html).
+site](http://docs.vagrantup.com).
 
-## Starting a single node
+## Starting cluster
 
-    vagrant up node1
-    vagrant ssh node1
+    vagrant up
 
-## Starting node2
-
-NOTE: Root password is 'vagrant'.
-
-    vagrant up node2
-    vagrant ssh node1
-    gnt-node add -s 33.33.34.12 node2
-
-## Starting node3
+## Adding nodes
 
 NOTE: Root password is 'vagrant'.
 
-    vagrant up node3
     vagrant ssh node1
-    gnt-node add -s 33.33.34.13 node3
+    sudo gnt-node add -s 33.33.34.12 node2
+    sudo gnt-node add -s 33.33.34.13 node3
+
+## Verify cluster
+
+    vagrant ssh node1
+    sudo gnt-cluster verify
 
 # Accessing the nodes
 
