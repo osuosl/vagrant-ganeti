@@ -1,5 +1,8 @@
-# Setup ganeti
+#!/bin/bash
+. /tmp/common.sh
+set -x
 
+# Setup ganeti
 if [ -f /etc/debian_version ] ; then
     $apt install vim git-core lvm2 aptitude nfs-common parted
 
