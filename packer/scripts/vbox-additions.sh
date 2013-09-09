@@ -1,3 +1,7 @@
+#!/bin/bash
+. /tmp/common.sh
+set -x
+
 # VirtualBox Additions
 
 # kernel source is needed for vbox additions

@@ -1,5 +1,7 @@
+#!/bin/bash
+. /tmp/common.sh
+set -x
 # cleanup
-
 if [ -f /etc/debian_version ] ; then
     # Removing leftover leases and persistent rules
     echo "cleaning up dhcp leases"
@@ -36,7 +38,7 @@ elif [ -f /etc/redhat-release ] ; then
         xargs -r yum -y remove
     yum -y clean all
 fi
-
+rm /tmp/common.sh
 # Zero out the free space to save space in the final image:
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY

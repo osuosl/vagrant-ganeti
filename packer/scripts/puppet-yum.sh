@@ -1,3 +1,7 @@
+#!/bin/bash
+. /tmp/common.sh
+set -x
+
 # install puppet
 if [ "$OS" == "centos" ] ; then
     URL="http://yum.puppetlabs.com/el/${OSRELEASE}"

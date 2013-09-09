@@ -1,3 +1,6 @@
+#!/bin/bash
+. /tmp/common.sh
+set -x
 # Add vagrant user
 if [ ! -d ${rootfs}/home/vagrant ] ; then
     $run_cmd groupadd vagrant

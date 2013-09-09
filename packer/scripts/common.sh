@@ -1,11 +1,9 @@
 #!/bin/bash
-set -x
-
 export PATH="/bin/:/usr/sbin:/usr/bin:/sbin:${PATH}"
 apt="apt-get -qq -y"
 yum="yum -q -y"
 
-date > /etc/vagrant_box_build_time
+set -x
 
 fail()
 {
@@ -19,7 +17,7 @@ chroot_cmd() {
 
 if [ -x /usr/bin/lsb_release ] ; then
     OS="$(lsb_release -s -i | tr '[A-Z]' '[a-z]')"
-    if [ "$OS" == "centos" ] ; then
+    if [ "$OS" = "centos" ] ; then
         OSRELEASE="$(lsb_release -s -r | sed -e 's/\..*//')"
     else
         OSRELEASE="$(lsb_release -s -c)"
@@ -30,4 +28,3 @@ elif [ -f /etc/redhat-release ] ; then
 elif [ -f /etc/gentoo-release ] ; then
     OS="gentoo"
 fi
-
