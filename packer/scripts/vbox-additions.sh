@@ -1,6 +1,9 @@
 #!/bin/bash
 . /tmp/common.sh
 set -x
+if [ ! -e /root/.vbox_version ] ; then
+    exit 0
+fi
 
 # VirtualBox Additions
 
