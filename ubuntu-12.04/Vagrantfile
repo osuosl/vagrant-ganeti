@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
     config.vm.box       = "ganeti-ubuntu-12.04-20130411"
     config.vm.box_url   = "http://ftp.osuosl.org/pub/osl/ganeti-tutorial/ganeti-ubuntu-12.04-20130411.box"
     #config.vm.share_folder "v-root", "/vagrant", "../", :owner => "vagrant", :group => "vagrant"
+    config.vm.synced_folder "/home/lance/pbuilder/precise", "/deb"
     config.vm.network :private_network, ip: "33.33.33.11", adapter: 2, auto_config: "false"
     config.vm.network :private_network, ip: "33.33.34.11", adapter: 3, auto_config: "false"
     config.vm.provider :virtualbox do |vb|
@@ -12,11 +13,11 @@ Vagrant.configure("2") do |config|
       # uncomment to disable hardware virt
       #vb.customize ["modifyvm", :id, "--hwvirtex", "off"]
     end
-    config.vm.provision :puppet do |puppet|
-      puppet.manifests_path   = "modules/ganeti_tutorial/nodes"
-      puppet.module_path      = "modules"
-      puppet.manifest_file    = "node1.pp"
-    end
+    #config.vm.provision :puppet do |puppet|
+    #  puppet.manifests_path   = "modules/ganeti_tutorial/nodes"
+    #  puppet.module_path      = "modules"
+    #  puppet.manifest_file    = "node1.pp"
+    #end
   end
 
   config.vm.define :node2 do |config|
