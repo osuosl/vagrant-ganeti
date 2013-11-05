@@ -29,9 +29,7 @@ of this is for instructional and testing purposes only.
 1. Install VirtualBox by going to their [download
 page](https://www.virtualbox.org/wiki/Downloads).
 
-2. Install Vagrant
-
-    `gem install vagrant`
+2. Install Vagrant by going to their following their [installation instructions](http://docs.vagrantup.com/v2/installation/index.html)
 
 3. Initialize submodule(s)
 
