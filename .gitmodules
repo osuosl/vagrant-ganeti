@@ -1,6 +1,6 @@
 [submodule "modules/ganeti_tutorial"]
 	path = modules/ganeti_tutorial
-	url = git://github.com/ramereth/puppet-ganeti-tutorial.git
+	url = git://github.com/osuosl/puppet-ganeti-tutorial.git
 [submodule "modules/vcsrepo"]
 	path = modules/vcsrepo
 	url = git://github.com/puppetlabs/puppetlabs-vcsrepo.git
